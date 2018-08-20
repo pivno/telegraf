@@ -511,7 +511,17 @@ WHERE	(
 		) OR  (
 			object_name LIKE '%User Settable%'
 			OR object_name LIKE '%SQL Errors%'
+		) or (
+			(object_name = 'SQLAgent:Alerts' and counter_name = 'Alerts activated/minute') or
+			(object_name = 'SQLServer:Cursor Manager by Type' and counter_name = 'Cursor Requests/sec') or
+			(object_name = 'SQLServer:Database Mirroring' and counter_name in ('Log Send Queue KB', 'Redo Queue KB') ) or
+			(object_name = 'SQLServer:General Statistics' and counter_name = 'Connection resets/sec' ) or
+			(object_name = 'SQLServer:Locks' and counter_name = 'Lock Requests/sec' ) or
+			(object_name = 'SQLServer:Memory Manager' and counter_name in ('Free Memory (KB)', 'Database Cache Memory (KB)') ) or
+			(object_name = 'SQLServer:Transactions' and counter_name = 'Longest Transaction Running Time' )
 		)
+
+		
 
 DECLARE @SQL NVARCHAR(MAX)
 SET  @SQL = REPLACE('
